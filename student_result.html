@@ -1,0 +1,44 @@
+<head>
+  <title> Student Report Card </title>
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <?php require_once 'connection.php'; ?>
+  <?php  
+    $mysqli = new mysqli('localhost','root','','student_result') or die(mysql_error($mysqli));?>
+  <table>
+    <thead>
+      <tr>
+        <td colspan="12">Student Result Board </td>
+      </tr>
+      <tr>
+        <td colspan="3"> Student Name </td>
+        <td colspan="3"> Roll Number </td>
+        <td colspan="3"> Total Marks </td>
+        <td colspan="3"> Status </td>
+      </tr>
+    </thead>
+        <?php 
+        $acs = array();
+        $result = $mysqli->query("SELECT name,roll_no,marks,status FROM student_result order by name") or die($mysqli->error); 
+        while($row =$result->fetch_assoc()){
+          $acs[]=$row;
+      }
+ ?>
+    <tbody>
+      <tr>
+        <?php 
+          foreach($acs as $ac) {?>
+        <td colspan="3"><?php echo $ac['name']; ?></td>
+        <td colspan="3"><?php echo $ac['roll_no']; ?></td>
+        <td colspan="3"><?php echo $ac['marks']; ?></td>
+        <?php if($ac['status']=='Fail'){?>
+                <td colspan="3" style= "font-color:red"><?php echo $ac['status']; }?></td>
+        <?php else{?>
+                <td colspan="3" style= "font-color:green"><?php echo $ac['status']; }?></td>
+         <?php }  ?>
+      </tr>
+    </tbody>
+    
+  </table>
+</body>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title> Student Admission Form </title>
+   <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+   <script src="assets/js/bootstrap.min.js"></script>
+   <script src="assets/css/validation.js"></script>
+</head>
+<body>
+   <form class="reg-form" action="submit.php" onsubmit="return validation()" method="post">
+   <p class="helper-text">* denotes a required field</p>
+   <div class="field-row">
+      <label class="form-label" for="firstName">First name</label>
+      <input type="text" id="firstName" class="field text-field first-name-field" required>
+      <span class="message"></span>
+   </div>
+   <div class="field-row">
+      <label class="form-label cf" for="lastName">Last name</label>
+      <input type="text" id="lastName" class="field text-field last-name-field" required>
+      <span class="message"></span>
+   </div>
+   <div class="field-row">
+      <label class="form-label" for="initials">Class</label>
+      <input type="text" id="class" class="field text-field initials-field">
+   </div>
+   <div class="field-row">
+      <label class="form-label" for="yop">Year of passing</label>
+      <input type="date" id="yop" class="field date-field dob-field" min="1990-01-01" max="2017-01-01"  required>
+      <span class="message"></span>
+   </div>
+   <div class="field-row">
+      <label class="form-label" for="tel">Marks(in percentage)</label>
+      <input type="tel" id="marks" class="field text-field" required>
+      <span class="message"></span>
+   </div>
+   
+   <div class="field-row">
+      <label class="form-label"></label>
+      <button type="submit"class="form-button" id="submit" disabled="disabled"">Submit</button>
+   </div>
+</form>
+<script>
+	function validation()
+	{
+
+		var fname= document.getElementById("firstName").value;
+		var lname= document.getElementById("lastName").value;
+		var class= document.getElementById("class").value;
+		var yop= document.getElementById("yop").value;
+		var marks= document.getElementById("marks").value;
+		var submit= document.getElementById("submit").value;			
+		
+		
+		
+        //email id expression code
+		var pwd_expression = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
+		var letters = /^[A-Za-z]+$/;
+		var filter = /^[a-zA-Z0-9]+$/;
+		var num= /^[0-9]+$/;
+
+		if(fname=='')
+		{
+			alert('Please enter your First name');
+		}
+		else if(lname=='')
+		{
+			alert('Please enter your Last name');
+		}
+		else if(!letters.test(fname))
+		{
+			alert('Name field required only alphabet characters');
+		}
+		else if(!letters.test(lname))
+		{
+			alert('Last Name field required only alphabet characters');
+		}
+		else if(lname.length>20)
+		{
+			alert('Last Name field should have less than 20 characters');
+		}
+		else if(fname.length>20)
+		{
+			alert('Name field should have less than 20 characters');
+		}
+		else if(class=='')
+		{
+			alert('Please enter your class');
+		}
+		else if (!filter.test(class))
+		{
+			alert('Invalid class');
+		}
+		else if(marks=='')
+		{
+			alert('Please enter your marks');
+		}
+		else if(!num.test(marks))
+		{
+			alert('Marks field required only numbers');
+		}
+		else if(yop=='')
+		{
+			alert('Please enter your year of passing');
+		}
+
+		else
+		{		submit.disabled=true;		                            
+               alert('Thank You for your submission!');
+		}
+	}
+
+</script>
